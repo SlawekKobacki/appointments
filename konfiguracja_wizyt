@@ -1,0 +1,51 @@
+# language: pl
+
+Funkcja: konfiguracja czasu trwania i ceny za wizyty 
+  # zasada "kto?", "co?", i "po co?"
+  # kto? ("kim jestem?")
+  Jako administrator placówki
+
+  # co? ("jaką mam potrzebę?", "co chcę zrobić?")
+  Chcę skonfigurować czas trwania wizyt dla danej specjalności i utworzyć cennik dla wizyt w przychodni
+
+  # po co? ("co chcę uzyskać?", "jaki to ma cel?")
+  Tak aby umożliwić tworzenie grafików czasu pracy specjalistów w placówce
+  
+ 	Scenariusz: Konfigurowanie czasu trwania wizyty  
+    Jako administrator placówki wybieram specjalizację "Internista"
+	Kiedy wybiorę z komponentu specjalizację "Internista" i ustawię czas trwania wizyty na 30 minut
+	wtedy wszystkie wizyty "Internisty" w placówce "Medilux" będą  miały zdefiniowany czas długości trwania wizyty na 30 minut
+	
+
+	Scenariusz definiowane cen za wizytę 
+	Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+	Kiedy w pole cennik wizyt wprowadzę cenę podstawową 30 złotych, cenę godziny nocne 50 złotych , cenę weekendy i święta - 60 złotych 
+	Wtedy dla wizyt lekarza "Zdzisław Kowalski", specjalizację "Internista" pojawi się cena za wizyty. 
+	Zdzisław Kowalski , internista , 27.03.2017, 8:00 - 8:30 , 30 złotych
+	Zdzisław Kowalski , internista , 27.03.2017, 8:30 - 9:00 , 30 złotych
+	Zdzisław Kowalski , internista , 27.03.2017, 2:00 - 2:30 , 50 złotych
+	Zdzisław Kowalski , internista , 26.12.2017  9:30 - 10:00 , 60 złotych 
+
+	
+	Scenariusz definiowane cen za wizytę 
+	Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Okulista"
+	Kiedy w pole cennik wizyt wprowadzę cenę podstawową 40 złotych, cenę godziny nocne 60 złotych , cenę weekendy i święta - 70 złotych 
+	Wtedy dla wizyt lekarza "Zdzisław Kowalski", specjalizację "Okulista " pojawi się cena za wizyty:
+	Zdzisław Kowalski , okulista , 27.03.2017, 8:00 - 8:30 , 40 złotych
+	Zdzisław Kowalski , okulista , 27.03.2017, 8:30 - 9:00 , 40 złotych
+	Zdzisław Kowalski , okulista , 27.03.2017, 2:00 - 2:30 , 60 złotych
+	Zdzisław Kowalski , okulista , 26.12.2017  9:30 - 10:00 , 70 złotych 
+
+	
+	Scenariusz trybu potwierdzania wizyt w przychodni "do potwierdzenia"
+	Jako administrator placówki określa tryb umawiania wizyt "do potwierdzenia"
+	Kiedy w  polu konfiguracja placówki określam placówki określa tryb umawiania wizyt "do potwierdzenia"
+	Wtedy dla wszystkich wizyt przychodni zmienia się status do potweirdzenia
+	wtedy administrator dodatkowo po wybraniu wizyty potwierdza dostępność wizyty dla pacjenta
+	
+	Scenariusz trybu potwierdzania wizyt w przychodni "automatyczna rezerwacja"
+	Jako administrator placówki określa tryb umawiania wizyt "automatyczna rezerwacja"
+	Kiedy w  polu konfiguracja placówki określam placówki określa tryb umawiania wizyt "do potwierdzenia"
+	Wtedy dla wszystkich wizyt przychodni zmienia się status "automatyczna rezerwacja"
+	wtedy administrator nie musi nic dodatkowo potwierdzać
+	wtedy pacjent w momencie naciśnięcia rezerwacji ma zarezerwowaną wizytę automatycznie.
