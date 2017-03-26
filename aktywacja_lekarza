@@ -1,0 +1,29 @@
+# language: pl
+
+Funkcja: aktywowanie i deaktywowanie  lekarza w przychodni 
+  # zasada "kto?", "co?", i "po co?"
+  # kto? ("kim jestem?")
+  Jako administrator placówki 
+
+  # co? ("jaką mam potrzebę?", "co chcę zrobić?")
+  Ustalam którzy lekarze moga być wyświetlani w grafiku przychodni
+
+  # po co? ("co chcę uzyskać?", "jaki to ma cel?")
+  Tak aby umożliwić  tworzenie grafików czasu pracy specjalistów w placówce
+
+# założenia dla całego pliku
+	lekarz musi być zarejestrowany w przychodni 
+
+  
+  Scenariusz aktywowanie lekarza w przychodni
+   Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+    Kiedy wybiorę  lekarza zaznaczam klawisz "aktywny" 
+    Wtedy lekarz będzie mógł pojawić się na liście dostępnych lekarzy
+	wtedy będzie mógł być ustawiany dla niego grafik wizyt
+
+	
+ Scenariusz deaktywowanie lekarza w przychodni
+   Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+    Kiedy wybiorę  lekarza zaznaczam klawisz "nieaktywny" 
+    Wtedy lekarz nie będzie mógł pojawić się na liście dostępnych lekarzy
+	wtedy nie będzie mógł być ustawiany dla niego gra
