@@ -1,0 +1,40 @@
+# language: pl
+
+Funkcja: Konfiguracja czasu pracy lekarza w placówce
+  # zasada "kto?", "co?", i "po co?"
+  # kto? ("kim jestem?")
+  Jako administrator placówki
+
+  # co? ("jaką mam potrzebę?", "co chcę zrobić?")
+  Chcę utworzyć konfigurację czasu pracy lekarza
+
+  # po co? ("co chcę uzyskać?", "jaki to ma cel?")
+  Tak aby umożliwić  tworzenie grafików czasu pracy specjalistów w placówce
+
+# założenia dla całego pliku
+  Wizyty to wolny slot czasowy  którego długość jest zdefiniowana w funckji konfiguracja lekarza (od 15:00 do 120 minut)
+  Administrator placówki może być lekarzem
+  Administrator placówki określa cennik wizyt w oparciu specjalizację
+  //Może być kilka cen dla określonej placówki , specjalizacji i określonego lekarza (np. godziny nocne, świąteczne, z przyjazdem)
+
+
+
+Scenariusz: Konfigurowanie czasu ważności grafiku pracy lekarza
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+	Kiedy lekarza "Zdzisław Kowalski" w placówce "Medilux" jest aktywny to ustawiam czas ważności grafiku na ostatni dzień bieżącego roku 
+		
+Scenariusz: Konfigurowanie czasu pracy lekarza 
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+	Kiedy wybiorę z komponentu "czas pracy lekarza" i ustawię czas pracy od 8:00 do 16:00 w dni robocze
+	wtedy w konfiguracji czasu pracy tego lekarza i specjalności "Internista" w placówce "Medilux" pojawi się zdefiniowany czas pracy  od 8:00 do 16:00 w dni robocze.
+	
+
+Scenariusz: Konfigurowanie czasu pracy lekarza w placówce "Medilux" zależnie od dni tygodnia
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+	Kiedy wybiorę z komponentu "czas pracy lekarza" i dzień tygodnia poniedziałek i ustawię czas pracy od 8:00 do 16:00
+	wtedy w konfiguracji czasu pracy tego lekarza i specjalności "Internista" w placówce "Medilux" pojawi się zdefiniowany czas pracy  od 8:00 do 16:00 w każdy poniedziałek.
+		
+Scenariusz: Konfigurowanie czasu pracy lekarza w placówce "Medilux" w różnych porach dnia roboczego
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+	Kiedy wybiorę z komponentu "czas pracy lekarza" i dzień tygodnia poniedziałek i ustawię czas pracy od 8:00 do 10:00 oraz od 14:00 do 16:00
+	wtedy w konfiguracji czasu pracy tego lekarza i specjalności "Internista" w placówce "Medilux" pojawi się zdefiniowany czas pracy  od 8:00 do 10:00 i od 14:00 do 16:00 w każdy poniedziałek.
