@@ -1,0 +1,87 @@
+# language: pl
+
+Funkcja: Tworzenie wizyt
+  # zasada "kto?", "co?", i "po co?"
+  # kto? ("kim jestem?")
+  Jako administrator placówki
+
+  # co? ("jaką mam potrzebę?", "co chcę zrobić?")
+  Chcę stworzyć wizyty przypisane do lekarzy
+
+  # po co? ("co chcę uzyskać?", "jaki to ma cel?")
+  Tak aby umożliwić pacjentom rezerwowanie wizyt w zdefiniowanych przeze mnie przedziałach czasowych.
+
+# założenia dla całego pliku
+  Wizyty to wolny slot czasowy  którego długość jest zdefiniowana w funckji konfiguracja lekarza (od 15:00 do 120 minut)
+  Administrator placówki może być lekarzem
+  Administrator placówki określa cennik wizyt w oparciu specjalizację
+  //Może być kilka cen dla określonej placówki , specjalizacji i określonego lekarza (np. godziny nocne, świąteczne, z przyjazdem)
+  
+
+Założenia:
+    Zakładając, że jestem zalogowany jako administrator placówki "Medilux"
+    Oraz jest zarejestrowany aktywny lekarz "Zdzisław Kowalski" w placówce "Medilux"
+	Oraz lekarz "Zdzisław Kowalski" jest internistą i okulistą (lekarz może mieć kilka specjalizacji w obrębie placówki i poza nią)
+     
+			
+    
+Scenariusz: Tworzenie pojedynczej wizyty (slotu)
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista"
+    Kiedy wybiorę z komponentu datepicker data i godzinę  wizytę od 12:00 do 12:30 w dniu 14.02.2016 i zatwierdzę
+    Wtedy powinna pojawić się wizyta od 12:00-12:30 w dniu 14.02.2016 dla specjalizacj "Internista" 
+    jest ona przypisana do lekarza "Zdzisław Kowalski"
+    jest ona przypisana do placówki "Medilux"
+
+
+Scenariusz: Tworzenie wielu wizyt (seria)
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista" który ma zdefniowany czas pracy  od 8:00 do 10:00 i od 14:00 do 16:00 w każdy poniedziałek
+    Kiedy wybiorę z komponentu datepicker (data) rozpoczęcia wizyt np. 27.03.2017 i data zakończenia wizyt 31.03.2017
+    i zatwierdzę wtedy powinna pojawić się następująca lsta wizyt:
+	Zdzisław Kowalski , internista , 27.03.2017, 8:00 - 8:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 8:30 - 9:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 9:00 - 9:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 9:30 - 10:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 14:00 - 14:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 14:30 - 15:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:00 - 15:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:30 - 16:00 , wolne
+	
+    
+Scenariusz kasowanie pojedynczej wizyty (slotu) dla której nie ma umówionej wizyty
+   Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista" (dla którego istnieje slot /grafik od 12:00 do 12:30 w dniu 14.02.2016)
+    Kiedy wybiorę z komponentu datepicker data i godzinę  wizytę od 12:00 do 12:30 w dniu 14.02.2016 i nacisnę klawisz "usun wizytę z grafiku "
+    Wtedy pojawić się komunikat "Usunięto wizytę" i nie powinna pojawić się wizyta od 12:00-12:30 w dniu 14.02.2016 dla specjalizacj "Internista" 
+
+Scenariusz: Kasowanie wielu wizyt (seria)
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista" który ma następującą listę wizyt
+	Zdzisław Kowalski , internista , 27.03.2017, 8:00 - 8:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 8:30 - 9:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 9:00 - 9:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 9:30 - 10:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 14:00 - 14:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 14:30 - 15:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:00 - 15:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:30 - 16:00 , wolne
+	Kiedy wybiorę z komponentu datepicker (data) rozpoczęcia wizyt (do usunięcia) np. 27.03.2017 i zatwierdzę
+    wtedy pojawi się komunikat "Usunięto wizyty" i nie powinny pojawić się żadne wizyty wcześniej zdefiniowane  lekarza "Zdzisław Kowalski", specjalizację "Internista"  w dniu 27.03.2017
+	
+Scenariusz kasowanie pojedynczej wizyty (slotu) dla której nie ma umówionej wizyty
+   Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista" (dla którego istnieje slot /grafik od 12:00 do 12:30 w dniu 14.02.2016) i jest umówione pacjent "Jan Nowak" (status wizyty inny niż "wolne")
+    Kiedy wybiorę z komponentu datepicker data i godzinę  wizytę od 12:00 do 12:30 w dniu 14.02.2016 i nacisnę klawisz "usun wizytę z grafiku "
+    Wtedy pojawić się komunikat "Wizyta nie jest wolna" i nie powinna pojawić się wizyta od 12:00-12:30 w dniu 14.02.2016 dla specjalizacj "Internista" 
+	
+
+
+Scenariusz: Kasowanie wielu wizyt (seria) wśród których jest  wizyta w statusie innym niż "wolna"
+    Jako administrator placówki wybieram lekarza "Zdzisław Kowalski", specjalizację "Internista" który ma następującą listę wizyt
+	Zdzisław Kowalski , internista , 27.03.2017, 8:00 - 8:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 8:30 - 9:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 9:00 - 9:30 , zarezerwowana
+	Zdzisław Kowalski , internista , 27.03.2017, 9:30 - 10:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 14:00 - 14:30 , zarezerwowana
+	Zdzisław Kowalski , internista , 27.03.2017, 14:30 - 15:00 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:00 - 15:30 , wolne
+	Zdzisław Kowalski , internista , 27.03.2017, 15:30 - 16:00 , wolne
+	Kiedy wybiorę z komponentu datepicker (data) rozpoczęcia wizyt (do usunięcia) np. 27.03.2017 i zatwierdzę
+    wtedy pojawi się komunikat "Na liście znajdują się wizyty które mają status ..  , czy na pewno chcesz usunąć", 
+	wtedy pojawi się "czy chcesz kontynuować ? Jeśli wybierzesz tak  -  nie powinny pojawić się żadne wizyty wcześniej zdefiniowane  lekarza "Zdzisław Kowalski", specjalizację "Internista"  w dniu 27.03.2017 a jeśli wybierzesz nie - operacja jest anulowana i wracamy do ekranu z wyśweitlonymi wizytami.
