@@ -1,0 +1,76 @@
+# language: pl
+
+Funkcja: rezerwacja wizyty przez Pacjenta
+  # zasada "kto?", "co?", i "po co?"
+  # kto? ("kim jestem?")
+  Jako pacjent /użytkownik systemu
+
+  # co? ("jaką mam potrzebę?", "co chcę zrobić?")
+  Chcę umówić wizytę do lekarza w przychodni
+
+  # po co? ("co chcę uzyskać?", "jaki to ma cel?")
+  Aby móc skorzystać z usług lekarza w przychodni
+  
+ 	Scenariusz: Wyszukiwanie wizyt do określonej specjalizacji 
+    Jako pacjent  placówki wybieram specjalizację "Internista" 
+	Kiedy wybiorę z komponentu specjalizację "Internista" 
+	wtedy pojawi się lista wizyt ze statusem "wolne" , ustawione domyslnie wg najbliższy czas wizyty
+	
+ 	Scenariusz: Wyszukiwanie wizyt do określonej specjalizacji  w określonej przychodni
+    Jako pacjent  wybieram specjalizację "Internista" 
+	Kiedy wybiorę z komponentu specjalizację "Internista"  i wybiorę z listy placówkę "Medilux" (lub wpiszę jej nazwę)
+	wtedy pojawi się lista wizyt ze statusem "wolne" , ustawione domyslnie wg najbliższy czas wizyty w przychodni "Medilux"
+	
+ 	Scenariusz: Wyszukiwanie wizyt do określonej specjalizacji wg geolokalizacji
+    Jako pacjent  wybieram specjalizację "Internista" 
+	Kiedy wybiorę z komponentu specjalizację "Internista" i mam włączoną  funkcję geolokalizacji
+	wtedy pojawi się lista wizyt ze statusem "wolne" , ustawione domyslnie wg najbliższy czas wizyty dla placówki , która jest najbliżej mojej lokalizacji
+	
+ 	Scenariusz: Wyszukiwanie wizyt do określonego lekarza
+    Jako pacjent  placówki wybieram specjalizację "Internista" oraz wpisuję poprawnie Nazwisko lekarza
+	Kiedy wybiorę z komponentu specjalizację "Internista" oraz wpiszę poprawnie Nazwisko lekarza "Kowalski"
+	wtedy pojawi się lista wizyt ze statusem "wolne" o specjaloności "Internista" dla lekarza "Kowalski", ustawione domyslnie wg najbliższy czas wizyty
+	
+	Scenariusz: Wyszukiwanie wizyt do określonej specjalizacji  i na określoną datę
+    Jako pacjent  wybieram specjalizację "Internista"  i wybieram datę w której powinna być wizyta
+	Kiedy wybiorę z komponentu specjalizację "Internista"  i wybiorę datę np. 27.03.2017 
+	wtedy pojawi się lista wizyt ze  statusem "wolne"  w dniu 27.03.2017 o specjaloności "Internista"
+	
+ 	Scenariusz: Rezerwowanie wizyty
+    Jako pacjent  placówki po wybraniu wizyty zaznaczam  klawisz "Zarezerwuj"
+	Kiedy wybiorę klawisz Zarezerwuj
+	wtedy wybrana wizyta zmieni status na wstępnie zarezerwowane i zniknie z dostępnych wizyt do umówienia
+	wtedy pacjent, administrator i lekarz  otrzymuje potwierdzenie na ekranie o wstępnej rezerwacji
+	wtedy pacjent jest przypisany do listy wizyt wybranego lekarza 
+
+	
+	Scenariusz: Potwierdzenie Rezerwowanie wizyty która wymaga dodatkowego potwierdzenia przez administratora przychodni 
+    Jako pacjent  placówki po Zarezerwowaniu wizyty
+	Kiedy wybiorę Potwierdź rezerwację
+	wtedy status wizyty zmieni się na potwerdź rezerwację (przez administratora)
+	wtedy pacjent otrzymuje potwierdzenie o statusie
+	
+	
+	Scenariusz: Potwierdzenie Rezerwowanie wizyty dla wizyt ustawionych automatyczną rezerwację
+    Jako pacjent  placówki po Zarezerwowaniu wizyty
+	Kiedy wybiorę Potwierdź rezerwację
+	wtedy status wizyty zmieni się na potwerdź rezerwację (przez administratora)
+	wtedy pacjent otrzymuje potwierdzenie o statusie
+	
+	Scenariusz: Odwoływanie wizyty przez Pacjenta jeśli do wizyty jest więcej niż 24 godziny
+    Jako pacjent  który posiada zarezerwowaną wizytę 
+	Kiedy wybiorę Anuluj rezerwację i nie jest to mniej niż 24 godziny do wizyty 
+	wtedy status wizyty zmieni się na "wolny"
+	wtedy pacjent otrzymuje potwierdzenie o statusie
+	wtedy pacjent nie otrzymuje zwrotu kosztów opłaty za rezerewacje - jeśli taka była
+	
+	Scenariusz: Odwoływanie wizyty przez Pacjenta jeśli do wizyty jest mniej  niż 24 godziny
+    Jako pacjent  który posiada zarezerwowaną wizytę 
+	Kiedy wybiorę Anuluj rezerwację i jest to mniej niż 24 godziny do wizyty 
+	wtedy otrzymam komunikat "skontaktuj się z przychodnią celem anulowania rezerwacji"
+	wtedy administrator otrzymuje automatyczna informację o tym fakcie 
+	wtedy pacjent nie otrzymuje zwrotu kosztów opłaty za rezerewacje - jeśli taka była
+	wtedy pacjent nie otrzymuje zwrotu kosztów opłaty za wizytę  - jeśli taka była
+
+
+	
